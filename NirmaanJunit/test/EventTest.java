@@ -125,8 +125,8 @@ public class EventTest {
         boolean expResult = true;
         boolean result = e.registerEvent();
         assertTrue(result);
-        sd = new Date(2014, 11, 28);
-         ed = new Date(2014,12,1);
+        sd = new Date(2014, 1, 27);
+         ed = new Date(2014,1,31);
         e = new Event("testevent2",sd,ed);
         expResult=false;
         result=e.registerEvent();
@@ -144,14 +144,14 @@ public class EventTest {
         System.out.println("getPending");
         Date sd = new Date(2014, 7, 28);
         Date ed = new Date(2014,8,1);
-        Event e = new Event("testevent",sd,ed);
+        Event e = new Event("testevent3",sd,ed);
         e.registerEvent();
         ArrayList<Event> result = Event.getPending();
         System.out.println(result.size());
         
          boolean found1=false;
                       for(Event tar : result)
-        {   System.out.println(tar.getEvent());
+        {   
             if(tar.getEvent().equals(e.getEvent()))
               found1=true;
             
