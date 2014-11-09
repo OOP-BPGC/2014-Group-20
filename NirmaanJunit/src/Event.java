@@ -50,6 +50,13 @@ public class Event implements Serializable{
     {
         return this.approved;
     }
+    public void AddActivity(String name,Date date)
+    {
+        Activity newone=new Activity(name,date);
+        
+        this.activities.add(newone);
+       
+    }
     
     public boolean registerEvent()
     {
