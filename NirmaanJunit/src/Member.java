@@ -39,9 +39,12 @@ public boolean RequestTransaction(String name,String reason,double amount)
     return done;    
   
 }
-public boolean RequestEvent(String name,String Date,String Venue)
+public boolean RequestEvent(String name,Date start,Date end)
+        
 {
-    return true;
+    Event E1 = new Event(name,start,end);
+    boolean done=E1.registerEvent();
+    return done;
 }
 private static String sha256(String base) {
 try{
