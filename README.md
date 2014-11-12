@@ -10,11 +10,11 @@ Distribution of Workflow
         Dhruv Ratan Gupta
         Sreejith V
     CRC Cards, UML Diagrams
-        Sreejith V
+        Vishakha Kulkarni
         Kartik Sathyanarayanan
     Unit Tests
         Anish Sanka
-        Vishakha Kulkarni
+        Sreejith V
     Code Development
         Raghav Passi
         Amit Patil
