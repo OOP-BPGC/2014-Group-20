@@ -1,14 +1,27 @@
 Project Requirements & Use cases
+
 	Dhruv Ratan Gupta
-        Sreejith V
+	Sreejith V
+
+
 CRC Cards, UML Diagrams
-        Vishakha Kulkarni
-        Kartik Sathyanarayanan
+
+	Vishakha Kulkarni
+	Kartik Sathyanarayanan
+
+
 Unit Tests
-        Anish Sanka
-        Sreejith V
+
+	Anish Sanka
+	Sreejith V
+
+
 Code Development
-        Raghav Passi
-        Amit Patil
+
+	Raghav Passi
+	Amit Patil
+
+
 Project Manager
-        Dhruv Ratan Gupta
+
+	Dhruv Ratan Gupta
