@@ -61,7 +61,7 @@ public class Event implements Serializable{
     public boolean registerEvent()
     {
         ArrayList<Event> event = new ArrayList<Event>();
-        event = (ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/NirmaanJunit/src/Events.ser");
+        event = (ArrayList<Event>)Utility.deserialize("Events.ser");
         if(event==null)
         {
         event=new ArrayList<Event>();
@@ -76,7 +76,7 @@ public class Event implements Serializable{
             }
             if(flag)
                 event.add(this);
-        Utility.serialize(event, "/home/sreejith/NetBeansProjects/NirmaanJunit/src/Events.ser");
+        Utility.serialize(event, "Events.ser");
         return flag;
         }
         catch(Exception E)
@@ -89,7 +89,7 @@ public class Event implements Serializable{
     public static ArrayList<Event> getPending()
     {
         ArrayList<Event> event = new ArrayList<Event>();
-        event = (ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/NirmaanJunit/src/Events.ser");
+        event = (ArrayList<Event>)Utility.deserialize("Events.ser");
         ArrayList<Event> temp = new ArrayList<Event>();
        try
        {for(Event tr : event)
