@@ -53,14 +53,14 @@ public class Transaction implements Serializable {
     
     public boolean registertransaction() {
         ArrayList<Transaction> trans = new ArrayList<Transaction>();
-        trans = (ArrayList<Transaction>)Utility.deserialize("/home/sreejith/NetBeansProjects/NirmaanJunit/src/Transactions.ser");
+        trans = (ArrayList<Transaction>)Utility.deserialize("Transactions.ser");
         if(trans==null)
         {
         trans=new ArrayList<Transaction>();
         }
         try
         {trans.add(this);
-        Utility.serialize(trans, "/home/sreejith/NetBeansProjects/NirmaanJunit/src/Transactions.ser");
+        Utility.serialize(trans, "Transactions.ser");
         return true;
         }
         catch(Exception E)
@@ -72,7 +72,7 @@ public class Transaction implements Serializable {
         }
     public static ArrayList<Transaction> getPending() {
     	ArrayList<Transaction> trans = new ArrayList<Transaction>();
-        trans = (ArrayList<Transaction>)Utility.deserialize("/home/sreejith/NetBeansProjects/NirmaanJunit/src/Transactions.ser");
+        trans = (ArrayList<Transaction>)Utility.deserialize("Transactions.ser");
         ArrayList<Transaction> temp = new ArrayList<Transaction>();
         try {
         	for(Transaction tr : trans) {   
