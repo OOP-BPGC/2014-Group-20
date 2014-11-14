@@ -1,3 +1,5 @@
+package test.test;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,6 +9,7 @@
 //Take care to change the username 3rd parameter or member initialisation everytime you run the test
 //otherwise test will fail
 //method- testRegister()
+import test.src.*;
 import java.util.ArrayList;
 import junit.framework.TestCase;
 import org.junit.After;

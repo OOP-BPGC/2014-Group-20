@@ -1,3 +1,5 @@
+package test.src;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class Transaction implements Serializable{
     private double amount;
     private static Funds funds;
     private boolean approved;
-    Transaction(String userName,String reason,double amount)
+    public Transaction(String userName,String reason,double amount)
     {
         this.userName=userName;// while creating a transaction in the main code pass the member object's 
         this.reason=reason;//user name attribute there.to avoid repetition of code

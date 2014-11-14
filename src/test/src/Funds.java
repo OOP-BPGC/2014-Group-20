@@ -1,3 +1,5 @@
+package test.src;
+
 
 import java.io.Serializable;
 
@@ -12,7 +14,7 @@ import java.io.Serializable;
  */
 public class Funds implements Serializable{
     private double fund;
-    Funds()
+    public Funds()
     {
         this.fund=0.0;
     }

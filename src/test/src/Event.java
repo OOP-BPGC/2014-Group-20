@@ -1,3 +1,5 @@
+package test.src;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class Event implements Serializable{
     private Date StartDate;
     private Date EndDate;
     private boolean approved;
-    Event(String Name,Date sd,Date ed)
+    public Event(String Name,Date sd,Date ed)
     {
         activities=new ArrayList<Activity>();
         this.name=Name;
@@ -52,7 +54,7 @@ public class Event implements Serializable{
     }
     public void AddActivity(String name,Date date)
     {
-        Activity newone=new Activity(name,date);
+        Activity newone= new Activity(name,date);
         
         this.activities.add(newone);
        

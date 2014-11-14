@@ -1,8 +1,11 @@
+package test.test;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import test.src.*;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -138,7 +141,8 @@ public class TransactionTest {
             if(tar.getuser().equals(instance2.getuser()))
                 found2=true;
         }
-        assertEquals(found1&&found2,true);
+        assertEquals(found1&&found2,true); //If an error occurs here, change the path of .ser file in 
+        								   //Transaction.java
         
         // TODO review the generated test code and remove the default call to fail.
        

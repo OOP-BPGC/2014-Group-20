@@ -1,3 +1,5 @@
+package test.src;
+
 
 import java.util.Date;
 
@@ -14,6 +16,11 @@ class Activity {
     Date date;
     String name;
     Activity()
+    {
+        this.date=null;
+        this.name=null;
+    }
+    Activity(String name, Date date)
     {
         this.date=null;
         this.name=null;
