@@ -123,8 +123,9 @@ public class Member extends Person implements Serializable{
 	}
 	
 	/**
-	 * @param query
-	 * @return
+	 * Searches the database for matching member names
+	 * @param query The search parameter (name of the member)
+	 * @return ArrayList containing matching queries
 	 */
 	public static ArrayList<Member> search(String query) {
 		ArrayList<Member> members;
