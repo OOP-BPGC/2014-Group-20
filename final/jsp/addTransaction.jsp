@@ -57,7 +57,7 @@
         if(amount > 0) {
     Transaction transaction = new Transaction(username,reason,amount);
     transaction.registertransaction();
-    message = "Registered";}
+    message = "Added transaction.";}
   }
       if(reason == null) {
       reason = "";
