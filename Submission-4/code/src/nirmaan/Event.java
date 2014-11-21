@@ -1,128 +1,167 @@
 package nirmaan;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * @author Amit Patil
- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-public class Event implements Serializable {
-	private String userName;
-	String name;
-	Date startDate;
-	Date endDate;
-	ArrayList<Activity> activities;
-	ArrayList<Person> participants;
-	private boolean approved;
-	
-	/**
-	 * @author Amit Patil
-	 * Inner Class : Acitivity
-	 */
-	public class Activity implements Serializable {
-		String name;
-		int numStudents;
-		Date date;
-		String desc;
-		
-	}
-	
-	/**
-	 * Class Constructor
-	 * @param user username of the member
-	 * @param eventName Name of the event
-	 * @param startDate Start Date of the event
-	 * @param endDate End date of the event
-	 */
-	public Event(String user, String eventName, Date startDate, Date endDate) {
-		this.endDate = endDate;
-		this.startDate = startDate;
-		this.userName = user;
-		this.name = eventName;
-		activities = new ArrayList<Activity>();
-		participants = new ArrayList<Person>();
-	}
-	
-	/**
-	 * Adds details of the activity
-	 * @param name Name of the activity
-	 * @param desc Activity description
-	 * @param date Date of the activity
-	 * @param numStudents Number of students involved
-	 */
-	public void addActivity(String name, String desc, Date date, int numStudents) {
-		Activity activity = new Activity();
-		activity.name = name;
-		activity.date = date;
-		activity.desc = desc;
-		activity.numStudents = numStudents;
-		activities.add(activity);
-	}
-	
-	/**
-	 * The method adds a person to the ArrayList of person
-	 * @param person An instance of Person class
-	 */
-	public void addParticipants(Person person) {
+/**
+ *
+ * @author sreejith
+ */
+public class Event implements Serializable{
+    
+    private ArrayList<Activity> activities;
+    private String name;
+    private Date StartDate;
+    private Date EndDate;
+    private ArrayList<Person> participants;
+    private boolean approved;
+    public Event(String Name,Date sd,Date ed)
+    {
+        activities=new ArrayList<Activity>();
+        this.name=Name;
+        this.StartDate=sd;
+        this.EndDate=ed;
+    }
+    public static boolean ApproveEvent(Event E)
+    {
+        E.approved=true;
+        ArrayList<Event> events = new ArrayList<Event>();
+        events=(ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
+        if(events.size()==0)
+            return false;
+        ArrayList<Event> temp = new ArrayList<Event>();
+        boolean found=false;
+        for(Event e : events)
+        {
+            if(!(e.getEvent().equals(E.getEvent())&&e.getStartDate().equals(E.getStartDate())))
+            {   found=true;
+                temp.add(e);
+                
+            }
+        }
+        temp.add(E);
+        Utility.serialize(temp, "/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
+        return found;
+        
+        
+        
+    }
+    public void addParticipants(Person person) {
 		participants.add(person);
 	}
-	
-	/**
-	 * Approves an event
-	 * @param e Event object
-	 */
-	public static void approve(Event e) {
-		e.approved = true;
-	}
-	
-	/**
-	 * @return approval status of the event
-	 */
-	public boolean checkApproval() {
-		return this.approved;
-	}
-	
-	/**
-	 * Adds an event to events.ser file only if dates are free.
-	 */
-	public void save() {
-		ArrayList<Event> events;
-		events = (ArrayList<Event>)Utility.deserialize("events.ser");
-		if(events == null) {
-			events = new ArrayList<Event>();
-		}
-		boolean flag = true;
-		for(Event e :events)
-        {         
-            if(!(this.startDate.before(e.startDate)&&this.endDate.before(e.startDate)
-            		||this.startDate.after(e.endDate)&&this.endDate.after(e.endDate)))
-            	flag=false;
+            
+    public String getEvent()
+    {
+        return this.name;
+    }
+    public Date getStartDate()
+    {
+        return this.StartDate;
+        
+    }
+    public Date getEndDate()
+    {
+        return this.EndDate;
+        
+    }
+    public boolean checkapproval()
+    {
+        return this.approved;
+    }
+    public void AddActivity(String name,Date date)
+    {
+        Activity newone=new Activity(name,date);
+        
+        this.activities.add(newone);
+       
+    }
+    
+    public boolean registerEvent()
+    {   
+        ArrayList<Event> event = new ArrayList<Event>();
+        event = (ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
+        if(event==null)
+        {
+        event=new ArrayList<Event>();
         }
-        if(flag) {
-        	events.add(this);
+        boolean flag=true;
+        try
+        {
+            for(Event e :event)
+            {         
+                if(!(this.StartDate.before(e.StartDate)&&this.EndDate.before(e.StartDate)||this.StartDate.after(e.EndDate)&&this.EndDate.after(e.EndDate)))
+                flag=false;
+            }
+            if(flag)
+                event.add(this);
+        Utility.serialize(event, "/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
+        return flag;
         }
-		Utility.serialize(events, "events.ser");
-	}
-	
-	/**
-	 * @return An ArrayList of pending events
-	 */
-	public static ArrayList<Event> getPending(){
-	    ArrayList<Event> event = new ArrayList<Event>();
-	    event = (ArrayList<Event>)Utility.deserialize("Events.ser");
-	    ArrayList<Event> temp = new ArrayList<Event>();
-	    try{
-	    	for(Event tr : event){
-	    		if(!tr.checkApproval()){
-	                temp.add(tr);
-	            }
-	        }
-	    }catch(NullPointerException e){
-	           e.printStackTrace();
-	     }
-	       
-	    return temp;
-	}
+        catch(Exception E)
+        {
+            return false;
+                    }
+        
+        
+        }
+    public static ArrayList<Event> getPending()
+    {
+        ArrayList<Event> event = new ArrayList<Event>();
+        event = (ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
+        ArrayList<Event> temp = new ArrayList<Event>();
+       try
+       {for(Event tr : event)
+        {   if(!tr.checkapproval())
+            {
+                temp.add(tr);
+            }
+                
+        }
+       }
+       catch ( NullPointerException e)
+       {
+           
+       }
+       
+        return temp;
+        
+        
+    }
+    public  ArrayList<Activity> showallactivity()
+    {
+        
+         return this.activities;
+        
+    }
+  /* public static void main(String args[])
+    {   
+        Date start= new Date(2014, 1, 1);
+        Date end = new Date(2014,1,4);
+        Event instance = new Event("testevent", start,end);
+        //System.out.println(instance.registerEvent());
+        
+        
+        
+        ArrayList<Event> e= new ArrayList<Event>();
+        
+                
+           e=Event.getPending();
+        //Event.ApproveEvent(e.get(0));
+           e=Event.getPending();
+        
+        for(Event a : e)
+        {
+            System.out.println(a.getEvent());
+        }
+        
+    }
+   */
+    
 }
