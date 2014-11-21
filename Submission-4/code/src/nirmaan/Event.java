@@ -23,7 +23,7 @@ public class Event implements Serializable{
     private ArrayList<Person> participants;
     private boolean approved;
     public Event(String Name,Date sd,Date ed)
-    {
+    {	participants=new ArrayList<Person>();
         activities=new ArrayList<Activity>();
         this.name=Name;
         this.StartDate=sd;
