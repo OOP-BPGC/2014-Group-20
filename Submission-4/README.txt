@@ -32,11 +32,11 @@ Amit		2013A7PS660G		CRC Cards				20				20
 Topic		 	Number in 			 Code
 	 		Stage-2 Submission 	Complete      Incomplete
 -----------------------------------------------------------------------------------------------
-Use cases				   	
-Classes					   
-Packages
-Sequence diagrams
-Unit Tests
+Use cases			1	   	1		0
+Classes				15	   	10		5
+Packages			2		1		1
+Sequence diagrams		5		5		0
+Unit Tests			4		4		0	
 -----------------------------------------------------------------------------------------------
 
 
