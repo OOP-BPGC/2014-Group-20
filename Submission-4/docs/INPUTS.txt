@@ -39,3 +39,43 @@ singing
 2016-08-23
 
 Expected Result : Registered.
+
+
+
+
+IN SEARCH
+
+query: K
+Expected result : shows list of those having k in their names
+
+IN add Institution
+BITS
+goa
+College
+
+IN add Volunteer
+Sreejith
+94993939393939
+
+IN add BloodDonor
+Amit
+4987543987498
+A+ve
+2014-Nov-11
+
+IN add SHGworker
+Sreejith
+
+IN add Faculty
+Sreejith V
+A7A20312
+
+IN add Student
+Sreejith V
+89857656
+EveBat14
+Shikre
+
+In add Market
+EveningFleaMarket
+Bits Campus
