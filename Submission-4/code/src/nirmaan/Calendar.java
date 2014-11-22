@@ -11,18 +11,16 @@ import nirmaan.Event;
 public class Calendar {
     private ArrayList<Event> finalised;
     
+    
     /**
-     * returns a sorted and approved list of events
-     **/
+     * @return A sorted and approved list of events
+     */
     public ArrayList<Event> ShowCalendar()
     {   Date order[]=new Date[30];
         ArrayList<Event> a =new ArrayList<Event>();
         int i=0;
 
         finalised=(ArrayList<Event>)Utility.deserialize("Events.ser");
-
-        finalised=(ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/" +
-        		"WebApplication1/src/java/src/Events.ser");
 
         for (Event e: finalised)
         { 
@@ -58,6 +56,7 @@ public class Calendar {
             }
             }
         }
+        
         finalised=new ArrayList<Event>();
         for(Event ab : a)
         {
@@ -75,14 +74,8 @@ public class Calendar {
         
         return finalised;
     }
-
-    public static void main(String args[])
-    {   System.out.println("..........................Upcoming Events......................");
-        Calendar a= new Calendar();
-        a.ShowCalendar();
-    }
-
-   /*public static void main(String args[])
+    
+    /*public static void main(String args[])
     {   System.out.println("..........................Upcoming Events......................");
         Calendar a= new Calendar();
         a.ShowCalendar();
