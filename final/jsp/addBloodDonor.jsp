@@ -56,9 +56,9 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Events<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Add Event</a></li>
-                <li><a href="#">View Calendar</a></li>
-                
+                 <li><a href="events.jsp">Add Event</a></li>
+                <li><a href="calendar.jsp">View Calendar</a></li>
+                <li><a href="approveevents.jsp">Add Event</a></li>
                
               </ul>
             </li>
@@ -71,7 +71,9 @@
                 <li><a href="addVolunteer.jsp">Volunteer</a></li>
                 <li><a href="addBloodDonor.jsp">Blood Donor</a></li>
                 <li><a href="addStudent.jsp">Student</a></li>
-                <li><a href="addmarket.jsp">Marker</a></li>
+               <li><a href="addmarket.jsp">Market</a></li>
+                 <li><a href="AddFaculty.jsp">Faculty</a></li>
+                <li><a href="AddSHGworker.jsp">SHG Worker</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -80,6 +82,7 @@
                 <li><a href="addFunds.jsp">Add Funds</a></li>
                 <li><a href="addTransaction.jsp">Make Transaction</a></li>
                 <li><a href="approve.jsp">Approve Transactions</a></li>
+                <li><a href="viewTransactions.jsp">View Transactions</a></li>
                
               </ul>
             </li>
@@ -125,10 +128,10 @@
         
         
        
-        <input name="name" type="text" class="form-control" placeholder="Name" value="<%=name%>" >
-        <input name="contact" type="text" class="form-control" placeholder="Contact Details" value="<%=contact%>" > 
-        <input name="bloodGroup" type="text" class="form-control" placeholder="Blood Type" value="<%=bloodGroup%>" >
-       <input name="date" type="date" class="form-control"  min="2014-09-09" placeholder="Date mm/dd/yyyy"> 
+        <input name="name" type="text" class="form-control" placeholder="Name" value="<%=name%>" required >
+        <input name="contact" type="text" class="form-control" placeholder="Contact Details" value="<%=contact%>" required> 
+        <input name="bloodGroup" type="text" class="form-control" placeholder="Blood Type" value="<%=bloodGroup%>"required >
+       <input name="date" type="date" class="form-control"  min="2014-09-09" placeholder="Date mm/dd/yyyy" required> 
         <span style="color:red"><%=message%></span>
       
         

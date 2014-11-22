@@ -4,10 +4,12 @@
   String designation;
   String username ="";
   Cookie[] cookies = request.getCookies();
+  if(cookies != null) {
   for(Cookie cookie: cookies) {
   
   if(cookie.getName().equals("username")) {
     username = cookie.getValue();
+  }
   }
 }
 
@@ -58,12 +60,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li ><a href="#">Home</a></li>
+            <li ><a href="main.jsp">Home</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Events<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Add Event</a></li>
-                <li><a href="#">View Calendar</a></li>
+                <li><a href="events.jsp">Add Event</a></li>
+                <li><a href="calendar.jsp">View Calendar</a></li>
+                <li><a href="approveevents.jsp">Approve Event</a></li>
                 
                
               </ul>
@@ -77,7 +80,9 @@
                 <li><a href="addVolunteer.jsp">Volunteer</a></li>
                 <li><a href="addBloodDonor.jsp">Blood Donor</a></li>
                 <li><a href="addStudent.jsp">Student</a></li>
-                <li><a href="addmarket.jsp">Marker</a></li>
+                <li><a href="addmarket.jsp">Market</a></li>
+                 <li><a href="AddFaculty.jsp">Faculty</a></li>
+                <li><a href="AddSHGworker.jsp">SHG Worker</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -86,6 +91,7 @@
                 <li><a href="addFunds.jsp">Add Funds</a></li>
                 <li><a href="addTransaction.jsp">Make Transaction</a></li>
                 <li><a href="approve.jsp">Approve Transactions</a></li>
+                <li><a href="viewTransactions.jsp">View Transactions</a></li>
                
               </ul>
             </li>

@@ -30,6 +30,9 @@
 		Designation designation;
 		if(username == null) {
      	username = ""; }
+      else {
+      message="Incorrect username/password.";
+    }
 
 		if(password!= null &&(designation = Member.authenticate(username,password)) !=null) {
 			Cookie cookie = new Cookie("username",username);
@@ -41,9 +44,7 @@
 			response.sendRedirect("main.jsp");
 
 		}
-		else {
-			message="Incorrect username/password.";
-		}
+		
 	%>
 
     <div class="container">

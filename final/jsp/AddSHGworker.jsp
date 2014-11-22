@@ -1,48 +1,46 @@
-<!DOCTYPE html>
+<%-- 
+    Document   : AddFaculty
+    Created on : 21 Nov, 2014, 9:23:34 PM
+    Author     : sreejith
+--%>
+<%@page import="nirmaan.SHGworker"%>
 <% 
 	boolean approve = false;
-  String designation;
 	Cookie[] cookies = request.getCookies();
 	for(Cookie cookie: cookies) {
-	if(cookie.getName().equals("designation")) {
-		if(!cookie.getValue().equals(""))
+	if(cookie.getName().equals("username")) {
+		if(!(cookie.getValue().equals(""))&&cookie.getValue()!=null)
 			approve = true;
-      designation = cookie.getValue();
 
 	}
 }
-
 	if(!approve) {
 	response.sendRedirect("login.jsp");
 }
 	
-
-
 %>
-<%@ page import="nirmaan.Designation,nirmaan.Institution" %>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+<%  String fac_name=request.getParameter("workername");
+    String message="";
+    if(fac_name!=null)
+    {SHGworker f =new SHGworker(fac_name);
+    f.addSHGworker();
+    message="Added";
+    }      
+        %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
 
-    <title>Add a institution - Nirmaan</title>
-
-    
     <link href="css/bootstrap-min.css" rel="stylesheet">
 
     <link href="css/navbar-static-top.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
-
-   
-    
-  </head>
-
-  <body>
-   <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    </head>
+    <body>
+         <nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -62,6 +60,7 @@
                 <li><a href="events.jsp">Add Event</a></li>
                 <li><a href="calendar.jsp">View Calendar</a></li>
                 <li><a href="approveevents.jsp">Approve Event</a></li>
+               
               </ul>
             </li>
             <li><a href="search.jsp">Search</a></li>
@@ -95,52 +94,14 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <%
-      String name = request.getParameter("name");
-      String address = request.getParameter("address");
-      String type = request.getParameter("type");
-    
-      String message ="";
-        if(name != null && address!=null) {
-    Institution institution = new Institution(name,address,type);
-    institution.addInstitution();
-    message = "Registered";
-  }
-      if(name == null) {
-      name = "";
-      type = ""; }
-      if(address == null) {
-        address = "";
-      }
-    
-  
-
-
-    %>
-
-    <div class="container">
-
-      <form class="form-signin" role="form" method="post" action="/addinstitution.jsp">
-       	<h1 style="margin-left:50px"> New institution </h1>
+    <form class="form-signin" action="AddSHGworker.jsp">
+        <h1> Add SHG Worker </h1>
+        <input class="form-control" type="text" name="workername" placeholder="workername" required >
         
-        
-       
-        <input name="name" type="text" class="form-control" placeholder="Name" value="<%=name%>" required>
-        <input name="address" type="text" class="form-control" placeholder="Address" value="<%=address%>" required> 
-           <input name="type" type="text" class="form-control" placeholder="Type" value="<%=type%>" required ><br>
-        <span style="color:red"><%=message%></span>
-      
-	   		
-       
-        
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Add Institution</button>
-      </form>
-
-    </div> 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+       <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Add SHG Worker</button>
+        <span style ="color :red"><%=message%></span>
+        </form>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="css/bootstrap.min.js"></script>
-    
-  </body>
+    </body>
 </html>
