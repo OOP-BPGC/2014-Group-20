@@ -1,14 +1,8 @@
 package nirmaan;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author Amit Patil
@@ -20,27 +14,44 @@ public class Transaction implements Serializable{
     private double amount;
     private static double funds;
     public boolean approved;
+    
+    /**
+     * Class Constructor
+     * @param userName Username of the member
+     * @param reason Details of the transaction
+     * @param amount Amount in Rupees
+     */
     public Transaction(String userName,String reason,double amount)
     {
         this.userName=userName;// while creating a transaction in the main code pass the member object's 
         this.reason=reason;//user name attribute there.to avoid repetition of code
         this.amount=amount;
         this.approved=false;
-            }
+    }
     
-   public void modifyFunds()
+    /**
+     * Modify Funds
+     */
+    public void modifyFunds()
     {   
         if(this.approved)
         {	
         	funds = funds - this.getamount();
-        	
-            
         }
     }
-   public double getFunds() {
+    
+    /**
+     * @return Fund
+     */
+    public double getFunds() {
 	   return funds;
-   }
-   //Gives ConcurrentModificationException sometimes
+    }
+    
+    /**
+     * Approves a transaction
+     * @param E Transaction to be approves
+     * @return approved/rejected
+     */
     public static void approveTransaction(Transaction E)
     {
     	
@@ -56,7 +67,8 @@ public class Transaction implements Serializable{
 	        {
 	        	
 	        	for(Transaction tran:trans) {
-	        		if(E.getuser().equals(tran.getuser())&& E.getreason().equals(tran.getreason()) && E.getamount()==tran.getamount()){
+	        		if(E.getuser().equals(tran.getuser())&& E.getreason().equals(tran.getreason()) 
+	        				&& E.getamount()==tran.getamount()){
 	        			
 	            }
 	        	else{
@@ -75,32 +87,47 @@ public class Transaction implements Serializable{
 	        catch(Exception e)
 	        {
 	            return;
-	                    }
-	        
-	        
-	    	
-	    
-    	
-    }
+	        }
+	}
+    
+    /**
+     * @return username
+     */
     public String getuser()
     {
         return this.userName;
     }
+    
+    /**
+     * @return Reason
+     */
     public String getreason()
     {
         return this.reason;
         
     }
+    
+    /**
+     * @return Amount
+     */
     public double getamount()
     {
         return this.amount;
         
     }
+    
+    /**
+     * @return Approval status
+     */
     public boolean checkapproval()
     {
         return this.approved;
     }
     
+    /**
+     * Registering the transaction, pending approval
+     * @return Status of registration
+     */
     public boolean registertransaction()
     {
         ArrayList<Transaction> trans;
@@ -117,44 +144,45 @@ public class Transaction implements Serializable{
         catch(Exception E)
         {
             return false;
-                    }
-        
-        
         }
+        
+        
+    }
+    
+    
+    /**
+     * @return List of transactions
+     */
     public static ArrayList<Transaction> view() {
     	ArrayList<Transaction> trans;
         trans = (ArrayList<Transaction>)Utility.deserialize("Transactions.ser");
         return trans;
     }
+    
+    /**
+     * @return Pending Transactions
+     */
     public static ArrayList<Transaction> getPending()
     {
         ArrayList<Transaction> trans;
         trans = (ArrayList<Transaction>)Utility.deserialize("Transactions.ser");
         ArrayList<Transaction> temp = new ArrayList<Transaction>();
-       try
-       {for(Transaction tr : trans)
-        {   if(!tr.checkapproval())
-            {
-                temp.add(tr);
+        try
+        {	for(Transaction tr : trans)
+        	{   if(!tr.checkapproval())
+        		{
+        			temp.add(tr);
                 
-            }
+        		}
                 
-        }
-       }
-       catch ( NullPointerException e)
-       {
-           
-       }
+        	}
+        }catch (NullPointerException e)
+       	{
+    	   System.out.println("No pending transactions");
+       	}
         return temp;
         
         
     }
-    
-    public static void main(String[] args) {
-    	
-    	
-    }
-    
-    
-    
+       
 }

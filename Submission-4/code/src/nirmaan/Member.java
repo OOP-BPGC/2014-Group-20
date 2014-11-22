@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 
-
 /**
  * 
  * @author Amit Patil
@@ -29,8 +28,8 @@ public class Member extends Person implements Serializable{
 	}
 	/**
 	 * Takes a string, hashes it using SHA-256 and then returns a hex string.
-	 * @param base
-	 * @return
+	 * @param base String to be encrypted
+	 * @return encrypted string
 	 */
 	private static String sha256(String base) {
 	        try{
@@ -51,8 +50,9 @@ public class Member extends Person implements Serializable{
 	    }
 	}
 	/**
-	 * Use this method to register a member and returns true if successful. Adds the current object to an ArrayList and serializes it.
-	 * @return 
+	 * Use this method to register a member and returns true if successful. 
+	 * Adds the current object to an ArrayList and serializes it.
+	 * @return registration status
 	 */
 	@SuppressWarnings("unchecked")
 	public boolean register() throws Exception {
@@ -77,10 +77,10 @@ public class Member extends Person implements Serializable{
 		}
 	}
 	/**
-	 * 
-	 * @param userName
-	 * @param password
-	 * @return
+	 * Authenticate User
+	 * @param userName Username
+	 * @param password Password
+	 * @return Designation of user
 	 */
 	public static Designation authenticate(String userName, String password) {
 		ArrayList<Member> members;
@@ -99,8 +99,8 @@ public class Member extends Person implements Serializable{
 	}
 	/**
 	 * Checks if the user name already exists; returns true if it does
-	 * @param members
-	 * @return
+	 * @param members List of members
+	 * @return Existence of the user
 	 */
 	private boolean checkUserNameExists(ArrayList<Member> members) throws Exception {
 		
@@ -115,6 +115,12 @@ public class Member extends Person implements Serializable{
 		}
 		return false;
 	}
+	
+	/**
+	 * Searches the database for matching member names
+	 * @param query The search parameter (name of the member)
+	 * @return ArrayList containing matching queries
+	 */
 	public static ArrayList<Member> search(String query) {
 		ArrayList<Member> members;
 		ArrayList<Member> result = new ArrayList<Member>();

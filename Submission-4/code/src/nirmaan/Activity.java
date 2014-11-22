@@ -1,21 +1,16 @@
 package nirmaan;
 
-
 import java.io.Serializable;
 import java.util.Date;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
- * @author sreejith
+ * @author Sreejith
  */
 public class Activity implements Serializable{
     Date date;
     String name;
+    
     /**
      * Class Constructor
      * @param name Name of the activity

@@ -7,7 +7,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * @author Amit Patil
+ *
+ */
 public class Utility {
+	
+	/**
+	 * Deserialize the .ser file
+	 * @param name File name
+	 * @return List of details in the file
+	 */
 	public static Object deserialize(String name)  {
 		//System.out.println("777");
 		try {
@@ -28,6 +38,12 @@ public class Utility {
 	        
 	    }
 	}
+	
+	/**
+	 * Serializes details into the file
+	 * @param object ArrayList to be serialized into the .ser file
+	 * @param name File name
+	 */
 	public static void serialize(Object object, String name) {
 	//	System.out.println("7777");
 		try {

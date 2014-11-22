@@ -6,10 +6,10 @@ Dhruv		2013A7PS117G		UseCase					30				10
 
 Sreejith	2013A7PS038G		UseCase					30				20
 					Project Requirements			50
-					Unit Testing				70
+					Unit Testing				60
 					Code Development			30
 
-Anish  	   	2012A7PS040G  		Unit Testing				-				-
+Anish  	   	2012A7PS040G  		Unit Testing				10				-
 
 Kartik		2013A7PS037G		UseCase					25				20
 					UML diagram				60
