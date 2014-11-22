@@ -121,7 +121,7 @@ public class Transaction implements Serializable{
         
         
         }
-    public ArrayList<Transaction> view() {
+    public static ArrayList<Transaction> view() {
     	ArrayList<Transaction> trans;
         trans = (ArrayList<Transaction>)Utility.deserialize("Transactions.ser");
         return trans;
