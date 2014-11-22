@@ -16,7 +16,7 @@ Kartik		2013A7PS037G		UseCase					25				20
 					CRC Cards				20
 
 Raghav		2013A7PS055G		CRC Cards				60				20
-					Code Development			20
+					Code Development			30
 					Unit Testing				30
 
 Vishakha	2012B1A7697G		UseCase					15				10
@@ -31,8 +31,8 @@ Amit		2013A7PS660G		CRC Cards				20				20
 Topic		 			Number in 					  Code
 	 				Stage-2 Submission 			Complete  	Incomplete
 ---------------------------------------------------------------------------------------------------------
-Use cases				   	
-Classes					   
+Use cases					
+Classes
 Packages
 Sequence diagrams
 Unit Tests
