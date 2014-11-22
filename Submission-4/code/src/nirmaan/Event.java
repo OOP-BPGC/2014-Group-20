@@ -34,7 +34,7 @@ public class Event implements Serializable{
     {
         E.approved=true;
         ArrayList<Event> events = new ArrayList<Event>();
-        events=(ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
+        events=(ArrayList<Event>)Utility.deserialize("Events.ser");
         if(events.size()==0)
             return false;
         ArrayList<Event> temp = new ArrayList<Event>();
@@ -48,7 +48,7 @@ public class Event implements Serializable{
             }
         }
         temp.add(E);
-        Utility.serialize(temp, "/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
+        Utility.serialize(temp, "Events.ser");
         return found;
         
         
@@ -87,7 +87,7 @@ public class Event implements Serializable{
     public boolean registerEvent()
     {   
         ArrayList<Event> event = new ArrayList<Event>();
-        event = (ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
+        event = (ArrayList<Event>)Utility.deserialize("Events.ser");
         if(event==null)
         {
         event=new ArrayList<Event>();
@@ -102,7 +102,7 @@ public class Event implements Serializable{
             }
             if(flag)
                 event.add(this);
-        Utility.serialize(event, "/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
+        Utility.serialize(event, "Events.ser");
         return flag;
         }
         catch(Exception E)
@@ -115,7 +115,7 @@ public class Event implements Serializable{
     public static ArrayList<Event> getPending()
     {
         ArrayList<Event> event = new ArrayList<Event>();
-        event = (ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
+        event = (ArrayList<Event>)Utility.deserialize("Events.ser");
         ArrayList<Event> temp = new ArrayList<Event>();
        try
        {for(Event tr : event)
