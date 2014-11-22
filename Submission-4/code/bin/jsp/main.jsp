@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <% 
-	boolean approve = false;
+  boolean approve = false;
   String designation;
-	Cookie[] cookies = request.getCookies();
-	for(Cookie cookie: cookies) {
-	if(cookie.getName().equals("designation")) {
-		if(!cookie.getValue().equals(""))
-			approve = true;
-      designation = cookie.getValue();
-
-	}
+  String username ="";
+  Cookie[] cookies = request.getCookies();
+  if(cookies != null) {
+  for(Cookie cookie: cookies) {
+  
+  if(cookie.getName().equals("username")) {
+    username = cookie.getValue();
+  }
+  }
 }
 
-	if(!approve) {
-	response.sendRedirect("login.jsp");
-}
-	
-
-
+  
 %>
-<%@ page import="nirmaan.Designation,nirmaan.Institution" %>
+  
+<%@ page import="nirmaan.Designation,nirmaan.Market" %>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -29,20 +26,28 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Add a institution - Nirmaan</title>
+    <title>Welcome - Nirmaan</title>
 
     
     <link href="css/bootstrap-min.css" rel="stylesheet">
 
-    <link href="css/navbar-static-top.css" rel="stylesheet">
+
+    
     <link href="css/signin.css" rel="stylesheet">
+    <link href="css/navbar-static-top.css" rel="stylesheet">
 
    
     
   </head>
+  
+
 
   <body>
-   <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    
+
+      <!-- Static navbar -->
+        <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -62,6 +67,8 @@
                 <li><a href="events.jsp">Add Event</a></li>
                 <li><a href="calendar.jsp">View Calendar</a></li>
                 <li><a href="approveevents.jsp">Approve Event</a></li>
+                
+               
               </ul>
             </li>
             <li><a href="search.jsp">Search</a></li>
@@ -84,7 +91,8 @@
                 <li><a href="addFunds.jsp">Add Funds</a></li>
                 <li><a href="addTransaction.jsp">Make Transaction</a></li>
                 <li><a href="approve.jsp">Approve Transactions</a></li>
-               <li><a href="viewTransactions.jsp">View Transactions</a></li>
+                <li><a href="viewTransactions.jsp">View Transactions</a></li>
+               
               </ul>
             </li>
           </ul>
@@ -95,52 +103,21 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <%
-      String name = request.getParameter("name");
-      String address = request.getParameter("address");
-      String type = request.getParameter("type");
-    
-      String message ="";
-        if(name != null && address!=null) {
-    Institution institution = new Institution(name,address,type);
-    institution.addInstitution();
-    message = "Registered";
-  }
-      if(name == null) {
-      name = "";
-      type = ""; }
-      if(address == null) {
-        address = "";
-      }
-    
-  
+   <div class="container">
 
-
-    %>
-
-    <div class="container">
-
-      <form class="form-signin" role="form" method="post" action="/addinstitution.jsp">
-       	<h1 style="margin-left:50px"> New institution </h1>
-        
-        
-       
-        <input name="name" type="text" class="form-control" placeholder="Name" value="<%=name%>" required>
-        <input name="address" type="text" class="form-control" placeholder="Address" value="<%=address%>" required> 
-           <input name="type" type="text" class="form-control" placeholder="Type" value="<%=type%>" required ><br>
-        <span style="color:red"><%=message%></span>
-      
-	   		
-       
-        
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Add Institution</button>
-      </form>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Welcome <b><%=username%></b></h1>
+        <p>This is the Nirmaan Activity Manager.</p>
+        <p>Use the navbar to navigate.</p>
+        <p>
+         
+        </p>
+      </div>
 
     </div> 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="css/bootstrap.min.js"></script>
-    
   </body>
 </html>

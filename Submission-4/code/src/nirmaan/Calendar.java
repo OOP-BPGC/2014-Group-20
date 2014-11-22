@@ -4,32 +4,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import nirmaan.Event;
 
-<<<<<<< HEAD
-public class Calendar {
-	private ArrayList<Event> finalised;
-=======
-import nirmaan.Event.Activity;
-
 /**
  *
  * @author sreejith
  */
 public class Calendar {
     private ArrayList<Event> finalised;
+    
     /**
      * returns a sorted and approved list of events
      **/
-     
->>>>>>> origin/master
     public ArrayList<Event> ShowCalendar()
     {   Date order[]=new Date[30];
         ArrayList<Event> a =new ArrayList<Event>();
         int i=0;
-<<<<<<< HEAD
+
         finalised=(ArrayList<Event>)Utility.deserialize("Events.ser");
-=======
-        finalised=(ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/WebApplication1/src/java/src/Events.ser");
->>>>>>> origin/master
+
+        finalised=(ArrayList<Event>)Utility.deserialize("/home/sreejith/NetBeansProjects/" +
+        		"WebApplication1/src/java/src/Events.ser");
+
         for (Event e: finalised)
         { 
            order[i++]=e.getStartDate();
@@ -81,18 +75,17 @@ public class Calendar {
         
         return finalised;
     }
-<<<<<<< HEAD
-   public static void main(String args[])
+
+    public static void main(String args[])
     {   System.out.println("..........................Upcoming Events......................");
         Calendar a= new Calendar();
         a.ShowCalendar();
     }
 
-=======
    /*public static void main(String args[])
     {   System.out.println("..........................Upcoming Events......................");
         Calendar a= new Calendar();
         a.ShowCalendar();
     }*/
->>>>>>> origin/master
+
 }

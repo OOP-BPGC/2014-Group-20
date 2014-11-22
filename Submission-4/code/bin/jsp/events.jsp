@@ -1,17 +1,18 @@
-<!DOCTYPE html>
+<%@page import="nirmaan.Event"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.util.Date"%>
+
 <% 
 	boolean approve = false;
-  String designation;
 	Cookie[] cookies = request.getCookies();
 	for(Cookie cookie: cookies) {
-	if(cookie.getName().equals("designation")) {
-		if(!cookie.getValue().equals(""))
+	if(cookie.getName().equals("username")) {
+		if(!(cookie.getValue().equals(""))&&cookie.getValue()!=null)
 			approve = true;
-      designation = cookie.getValue();
 
 	}
 }
-
 	if(!approve) {
 	response.sendRedirect("login.jsp");
 }
@@ -19,9 +20,26 @@
 
 
 %>
-<%@ page import="nirmaan.Designation,nirmaan.Institution" %>
+<%  String Name = request.getParameter("Name");
+    String Sd = request.getParameter("StartDate");
+    String Ed = request.getParameter("EndDate");
+    String Activityno = request.getParameter("activityno");
+    String message="";
+    boolean pass=true;
+    if(Name==null)Name="";
+    if(Sd==null){Sd="0000-00-00";}
+    if(Ed==null){Ed="0000-00-01";}
+    if(Activityno==null){Activityno="0";}
+    Date Sdate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(Sd);
+    Date Edate = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH).parse(Ed);
+    if(Sdate.after(Edate))
+    {message="Start date cant be after end date"; pass=false;}
+    //out.println(Sdate);
+    
+    %>
 <html lang="en">
   <head>
+      <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,12 +47,12 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Add a institution - Nirmaan</title>
+    <title>EventRequest - Nirmaan</title>
 
     
     <link href="css/bootstrap-min.css" rel="stylesheet">
-
-    <link href="css/navbar-static-top.css" rel="stylesheet">
+<link href="css/navbar-static-top.css" rel="stylesheet">
+    
     <link href="css/signin.css" rel="stylesheet">
 
    
@@ -42,7 +60,8 @@
   </head>
 
   <body>
-   <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -62,6 +81,8 @@
                 <li><a href="events.jsp">Add Event</a></li>
                 <li><a href="calendar.jsp">View Calendar</a></li>
                 <li><a href="approveevents.jsp">Approve Event</a></li>
+                
+               
               </ul>
             </li>
             <li><a href="search.jsp">Search</a></li>
@@ -84,7 +105,8 @@
                 <li><a href="addFunds.jsp">Add Funds</a></li>
                 <li><a href="addTransaction.jsp">Make Transaction</a></li>
                 <li><a href="approve.jsp">Approve Transactions</a></li>
-               <li><a href="viewTransactions.jsp">View Transactions</a></li>
+                <li><a href="viewTransactions.jsp">View Transactions</a></li>
+               
               </ul>
             </li>
           </ul>
@@ -95,52 +117,46 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <%
-      String name = request.getParameter("name");
-      String address = request.getParameter("address");
-      String type = request.getParameter("type");
-    
-      String message ="";
-        if(name != null && address!=null) {
-    Institution institution = new Institution(name,address,type);
-    institution.addInstitution();
-    message = "Registered";
-  }
-      if(name == null) {
-      name = "";
-      type = ""; }
-      if(address == null) {
-        address = "";
-      }
-    
-  
-
-
-    %>
+	
+	
 
     <div class="container">
 
-      <form class="form-signin" role="form" method="post" action="/addinstitution.jsp">
-       	<h1 style="margin-left:50px"> New institution </h1>
-        
-        
-       
-        <input name="name" type="text" class="form-control" placeholder="Name" value="<%=name%>" required>
-        <input name="address" type="text" class="form-control" placeholder="Address" value="<%=address%>" required> 
-           <input name="type" type="text" class="form-control" placeholder="Type" value="<%=type%>" required ><br>
+      <form class="form-signin" role="form" method="post" action="events.jsp">
+       	<h1 style="margin-left:70px">Add Event </h1>
+       	
+        <input name="Name" type="text" class="form-control" placeholder="EventName" value="<%=Name%>" required autofocus></p>
+        <input name="StartDate" type="date" class="form-control"  min="2014-11-20" value ="<%=Sd%> "required >
+                <input name="EndDate" type="date" class="form-control" min="2014-11-21" value = "<%=Ed%> " required ></p>
         <span style="color:red"><%=message%></span>
-      
-	   		
+        <p>No of activities <input name="activityno" type="range" class="form-control" min="0" max="7" value="<%=Integer.parseInt(Activityno)%>">
+            </p>
+         <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Add Event</button>
+       <br>
+
        
+       <br>
+       <br>
         
+       <form action="eventprocess.jsp">
+          <%for(int i=1;i<=Integer.parseInt(Activityno);i++)
+        {
+     
+        %> <p>Activity<%=i%><input type="text" name="activity<%=i%>">  Date: <input type="date" name="activitydate<%=i%>"> </p>
+        <%
         
-        <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Add Institution</button>
+    }if(!(Integer.parseInt(Activityno)==0)&&pass==true){
+          %><p> <input type="submit" formaction="eventprocess.jsp" value="register">
+                    
       </form>
+          <%
+    }
+        %>
 
     </div> 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="css/bootstrap.min.js"></script>
-    
   </body>
 </html>

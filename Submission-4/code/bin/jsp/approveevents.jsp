@@ -1,47 +1,39 @@
+<%@page import="nirmaan.Activity"%>
 <!DOCTYPE html>
-<% 
-	boolean approve = false;
-  String designation;
-	Cookie[] cookies = request.getCookies();
-	for(Cookie cookie: cookies) {
-	if(cookie.getName().equals("designation")) {
-		if(!cookie.getValue().equals(""))
-			approve = true;
-      designation = cookie.getValue();
-
-	}
+<%
+boolean approve = false;
+String designation;
+String username ="";
+Cookie[] cookies = request.getCookies();
+for(Cookie cookie: cookies) {
+if(cookie.getName().equals("designation")) {
+if(cookie.getValue().equals("PRHEAD"))
+approve = true;
+designation = cookie.getValue();
 }
-
-	if(!approve) {
-	response.sendRedirect("login.jsp");
+if(cookie.getName().equals("username")) {
+username = cookie.getValue();
 }
-	
-
-
+}
+if(!approve) {
+response.sendRedirect("login.jsp");
+}
 %>
-<%@ page import="nirmaan.Designation,nirmaan.Institution" %>
+<%@ page import="nirmaan.Designation,nirmaan.Event,java.util.*" %>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-
-    <title>Add a institution - Nirmaan</title>
-
-    
-    <link href="css/bootstrap-min.css" rel="stylesheet">
-
-    <link href="css/navbar-static-top.css" rel="stylesheet">
-    <link href="css/signin.css" rel="stylesheet">
-
-   
-    
-  </head>
-
-  <body>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="favicon.ico">
+<title>Approve Event - Nirmaan</title>
+<link href="css/bootstrap-min.css" rel="stylesheet">
+<link href="css/navbar-static-top.css" rel="stylesheet">
+<link href="css/signin.css" rel="stylesheet">
+</head>
+<body>
    <nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -62,6 +54,7 @@
                 <li><a href="events.jsp">Add Event</a></li>
                 <li><a href="calendar.jsp">View Calendar</a></li>
                 <li><a href="approveevents.jsp">Approve Event</a></li>
+               
               </ul>
             </li>
             <li><a href="search.jsp">Search</a></li>
@@ -95,52 +88,54 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <%
-      String name = request.getParameter("name");
-      String address = request.getParameter("address");
-      String type = request.getParameter("type");
-    
-      String message ="";
-        if(name != null && address!=null) {
-    Institution institution = new Institution(name,address,type);
-    institution.addInstitution();
-    message = "Registered";
-  }
-      if(name == null) {
-      name = "";
-      type = ""; }
-      if(address == null) {
-        address = "";
-      }
-    
-  
-
-
-    %>
-
-    <div class="container">
-
-      <form class="form-signin" role="form" method="post" action="/addinstitution.jsp">
-       	<h1 style="margin-left:50px"> New institution </h1>
+<%
+int j =0;
+ArrayList<Event> even = Event.getPending();
+for(Event tran: even) {
+if(request.getParameter("" + j) != null) {
+System.out.println(j);
+Event.ApproveEvent(tran);
+}
+j++;
+}
+%>
+<div class="container">
+<form role="form" method="post" action="approveevents.jsp">
+<h1 style="margin-left:50px"> Approve Events </h1>
+<%
+int i = 0;
+ArrayList<Event> trans = Event.getPending();
+%>
+<table style =" width : 100% ">
+    <tr>
+        <th>Approve</th>
+        <th>Name</th>
+        <th>StartDate</th>
+        <th>EndDate</th>
+        <th>Activity</th>
         
-        
-       
-        <input name="name" type="text" class="form-control" placeholder="Name" value="<%=name%>" required>
-        <input name="address" type="text" class="form-control" placeholder="Address" value="<%=address%>" required> 
-           <input name="type" type="text" class="form-control" placeholder="Type" value="<%=type%>" required ><br>
-        <span style="color:red"><%=message%></span>
-      
-	   		
-       
-        
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Add Institution</button>
-      </form>
+    </tr>
+    <% for(Event events: trans) {
+%>
+<tr>
+    <td><input name="<%=""+ i %>" type="checkbox" class="form-control" value="<%=i%>" > </td>
+<td><%=events.getEvent()%>  </td>
+<td><i><%= events.getStartDate()%></i></td>
+<td><i> <%= events.getEndDate() %></i></td>
+<td>
+<% for(Activity a : events.showallactivity())
+{   out.println(a.getname());
+    }
+ %>
+</td>
+</tr>
+<%i++;}%>
+</table>
 
-    </div> 
-
+<button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Approve</button>
+</form>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="css/bootstrap.min.js"></script>
-    
-  </body>
+<script src="css/bootstrap.min.js"></script>
+</body>
 </html>
