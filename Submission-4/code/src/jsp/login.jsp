@@ -30,6 +30,9 @@
 		Designation designation;
 		if(username == null) {
      	username = ""; }
+      else {
+      message="Incorrect username/password.";
+    }
 
 		if(password!= null &&(designation = Member.authenticate(username,password)) !=null) {
 			Cookie cookie = new Cookie("username",username);
@@ -38,17 +41,16 @@
 			cookie2.setMaxAge(60*60*12);
 			response.addCookie(cookie);
 			response.addCookie(cookie2);
+			response.sendRedirect("main.jsp");
 
 		}
-		else {
-			message="Incorrect username/password.";
-		}
+		
 	%>
 
     <div class="container">
 
       <form class="form-signin" role="form" method="post" action="/login.jsp">
-       	<h1 style="margin-left:50px"> Nirmaan </h1>
+       	<h1 > Nirmaan - Login to Continue </h1>
         <input name="username" type="text" class="form-control" placeholder="Username"  value="<%=username%>"required autofocus>
         <input name="password" type="password" class="form-control" placeholder="Password">
         <span style="color:red"><%=message%></span>

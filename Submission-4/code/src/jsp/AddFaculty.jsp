@@ -1,48 +1,50 @@
-<!DOCTYPE html>
+<%-- 
+    Document   : AddFaculty
+    Created on : 21 Nov, 2014, 9:23:34 PM
+    Author     : sreejith
+--%>
+<%@page import="nirmaan.Faculty"%>
 <% 
 	boolean approve = false;
-  String designation;
 	Cookie[] cookies = request.getCookies();
 	for(Cookie cookie: cookies) {
-	if(cookie.getName().equals("designation")) {
-		if(!cookie.getValue().equals(""))
+	if(cookie.getName().equals("username")) {
+		if(!(cookie.getValue().equals(""))&&cookie.getValue()!=null)
 			approve = true;
-      designation = cookie.getValue();
 
 	}
 }
-
 	if(!approve) {
 	response.sendRedirect("login.jsp");
 }
 	
-
-
 %>
-<%@ page import="nirmaan.Designation,nirmaan.Institution" %>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-
-    <title>Add a institution - Nirmaan</title>
-
-    
-    <link href="css/bootstrap-min.css" rel="stylesheet">
+<%  String message="";
+        String fac_name=request.getParameter("Facultyname");
+    String PSRN_no=request.getParameter("Psrn_no");
+    boolean pass=true;
+    if(fac_name==null){fac_name="";pass=false;}
+    if(PSRN_no==null){PSRN_no="";pass=false;}
+    if(pass)
+    {   
+        Faculty f =new Faculty(fac_name,PSRN_no);
+    f.addFaculty();
+    message="Added";
+    }      
+        %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Add Faculty-Nirmaan</title>
+         <link href="css/bootstrap-min.css" rel="stylesheet">
 
     <link href="css/navbar-static-top.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
-
-   
-    
-  </head>
-
-  <body>
-   <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    </head>
+    <body>
+         <nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -95,52 +97,14 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <%
-      String name = request.getParameter("name");
-      String address = request.getParameter("address");
-      String type = request.getParameter("type");
-    
-      String message ="";
-        if(name != null && address!=null) {
-    Institution institution = new Institution(name,address,type);
-    institution.addInstitution();
-    message = "Registered";
-  }
-      if(name == null) {
-      name = "";
-      type = ""; }
-      if(address == null) {
-        address = "";
-      }
-    
-  
-
-
-    %>
-
-    <div class="container">
-
-      <form class="form-signin" role="form" method="post" action="/addinstitution.jsp">
-       	<h1 style="margin-left:50px"> New institution </h1>
-        
-        
-       
-        <input name="name" type="text" class="form-control" placeholder="Name" value="<%=name%>" required>
-        <input name="address" type="text" class="form-control" placeholder="Address" value="<%=address%>" required> 
-           <input name="type" type="text" class="form-control" placeholder="Type" value="<%=type%>" required ><br>
-        <span style="color:red"><%=message%></span>
-      
-	   		
-       
-        
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Add Institution</button>
-      </form>
-
-    </div> 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <form class="form-signin" action="AddFaculty.jsp">
+            <h1> Add Faculty </h1>
+         <input type="text" class="form-control" name="Facultyname" placeholder="Name" required ></p>
+        <input type="text" name="Psrn_no" class="form-control" placeholder="PSRN_no" required ></p>
+         <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Add Faculty</button>
+        </form>
+         <span style ="color :red"><%=message%></span>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="css/bootstrap.min.js"></script>
-    
-  </body>
+    </body>
 </html>
